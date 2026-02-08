@@ -13,10 +13,6 @@ stages {
             archiveArtifacts artifacts: 'target/*.jar'
         }
     }
-//    stage('Deploy') {
-//        steps {
-//            echo 'Deploying...'
-//        }
-//    }
+
 }
 }
