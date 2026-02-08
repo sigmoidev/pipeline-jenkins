@@ -3,7 +3,7 @@ agent any
 stages {
     stage('Build') {
         steps {
-            bat 'maven install'
+            bat './mvnw clean install'
         }
     }
 //    stage('Test') {
