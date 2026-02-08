@@ -14,10 +14,12 @@ stages {
             archiveArtifacts artifacts: 'target/*.jar'
         }
     }
+
     stage('documentation') {
             steps {
                 bat './mvnw javadoc:javadoc'
                 archiveArtifacts artifacts: 'target/site/apidocs/**'
+
             }
         }
 
