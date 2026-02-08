@@ -5,6 +5,7 @@ stages {
         steps {
             bat './mvnw clean install'
             archiveArtifacts artifacts: 'target/*.jar'
+            junit 'target/surefire-reports/*.xml'
         }
     }
 //    stage('Test') {
