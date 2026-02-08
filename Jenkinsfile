@@ -18,12 +18,7 @@ stages {
             junit '**/target/surefire-reports/*.xml'
         }
     }
-    stage('Build') {
-        steps {
-            bat './mvnw install'
-            archiveArtifacts artifacts: 'target/*.jar'
-        }
-    }
+
     stage('Documentation') {
         steps {
             script {
@@ -55,25 +50,34 @@ stages {
         }
     }
 
+  stage('Build') {
+        steps {
+            bat './mvnw install'
+            archiveArtifacts artifacts: 'target/*.jar'
+        }
+        post {
+    always {
+   success {
+     emailext (
+            subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: """<p>Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'</p>
+                     <p>Check console output at <a href="${env.BUILD_URL}console">this link</a> for details.</p>""",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            to:'ha.deboub.cntsid@gmail.com'
+        )
+        failure {
+    emailext (
+            subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: """<p>Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'</p>
+                     <p>Check console output at <a href="${env.BUILD_URL}console">this link</a> for details.</p>""",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            to:'ha.deboub.cntsid@gmail.com'
+}
 
 }
-    post {
-        always {
-            publishHTML ([
-            allowMissing: false,
-             alwaysLinkToLastBuild: true,
-             keepAll: true,
-             reportDir: 'target/site/apidocs',
-             reportFiles: 'index.html',
-             reportName: 'Documentation'
-             ])
-
-        }
-        success {
-            echo '✅ Pipeline completed successfully!'
-        }
-        failure {
-            echo '❌ Pipeline failed!'
-        }
+}
+}
     }
+}
+
 }
