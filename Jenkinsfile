@@ -33,7 +33,7 @@ stages {
 
   }
 
-}
+
 stage('html') {
     steps {
 
@@ -47,5 +47,6 @@ stage('html') {
                   }
     }
 
+}
 }
 }
