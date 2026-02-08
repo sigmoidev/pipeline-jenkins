@@ -30,7 +30,22 @@ stages {
               archiveArtifacts artifacts: 'doc.zip', fingerprint: true
           }
       }
+
   }
+
+}
+stage('html') {
+    steps {
+
+                always {
+                     publishHTML (target : [allowMissing: false,
+                      alwaysLinkToLastBuild: true,
+                      keepAll: true,
+                      reportFiles: 'target/site/apidocs',
+                      reportName: 'index.html',
+                      reportTitles: 'Documentation Report'])
+                  }
+    }
 
 }
 }
