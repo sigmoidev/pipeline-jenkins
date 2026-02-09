@@ -57,13 +57,13 @@ pipeline {
         }
 //comments
         stage('Deploy') {
-            steps {
+
 
           when {
                 branch 'second-branche'
 }
 
-
+ steps {
               bat 'docker-compose up --build -d'
 //                echo 'Deploying...'
 //                  mail (
