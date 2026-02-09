@@ -48,13 +48,14 @@ pipeline {
         }
 //comments
         stage('Deploy') {
-            steps {
+
 
           when {
                 branch 'second-branche'
 }
 steps {
     bat 'echo Deploying...'
+}
 }
 
 // checkout
