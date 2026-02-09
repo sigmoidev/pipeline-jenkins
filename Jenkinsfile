@@ -1,7 +1,5 @@
 pipeline {
     agent any
-
-    stages {
     stage('Preparation') {
     parallel {
        stage('Checkout') {
@@ -18,9 +16,9 @@ pipeline {
 
 
     }
-
-
 }
+
+
 
 
         stage('Test') {
@@ -29,6 +27,8 @@ pipeline {
                 junit '**/target/surefire-reports/*.xml'
             }
         }
+
+
 
 //        stage('Documentation') {
 //            steps {
