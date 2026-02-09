@@ -54,6 +54,8 @@ pipeline {
                 branch 'second-branche'
 }
 
+
+// checkout
 bat 'echo Deploying...'
 //              bat 'docker-compose up --build -d'
 ////                echo 'Deploying...'
