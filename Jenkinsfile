@@ -53,10 +53,12 @@ pipeline {
           when {
                 branch 'second-branche'
 }
-
+steps {
+    bat 'echo Deploying...'
+}
 
 // checkout
-bat 'echo Deploying...'
+//bat 'echo Deploying...'
 //              bat 'docker-compose up --build -d'
 ////                echo 'Deploying...'
 ////                  mail (
