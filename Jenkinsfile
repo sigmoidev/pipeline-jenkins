@@ -46,7 +46,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar'
             }
         }
-
+//comments
         stage('Deploy') {
             steps {
               bat 'docker-compose up -build'
