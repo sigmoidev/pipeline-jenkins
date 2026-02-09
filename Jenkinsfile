@@ -2,17 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    stage('Preparation') {
+    parallel {
+       stage('Checkout') {
+                   steps {
+                       checkout scm
+                   }
+               }
 
-        stage('Init') {
-            steps {
-                bat './mvnw clean'
-            }
-        }
+               stage('Init') {
+                   steps {
+                       bat './mvnw clean'
+                   }
+               }
+
+
+    }
+
+
+}
+
 
         stage('Test') {
             steps {
@@ -48,28 +57,23 @@ pipeline {
         }
 //comments
         stage('Deploy') {
-
+            steps {
 
           when {
                 branch 'second-branche'
 }
-steps {
-    bat 'echo Deploying...'
-}
-}
 
-// checkout
-//bat 'echo Deploying...'
-//              bat 'docker-compose up --build -d'
-////                echo 'Deploying...'
-////                  mail (
-////                                subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-////                                body: """<p>Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'</p>
-////                                         <p>Check console output at <a href="${env.BUILD_URL}console">this link</a> for details.</p>""",
-////                               // recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-////                                to: 'ha.deboub.cntsid@gmail.com'
-////                            )
-//            }
+
+              bat 'docker-compose up --build -d'
+//                echo 'Deploying...'
+//                  mail (
+//                                subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+//                                body: """<p>Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'</p>
+//                                         <p>Check console output at <a href="${env.BUILD_URL}console">this link</a> for details.</p>""",
+//                               // recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+//                                to: 'ha.deboub.cntsid@gmail.com'
+//                            )
+            }
         }
     }
     //add some comment
