@@ -1,6 +1,6 @@
-# Step 1: Use an official OpenJDK 21 base image from Docker Hub
+## Step 1: Use an official OpenJDK 21 base image from Docker Hub
 FROM eclipse-temurin:21-jdk-alpine
-
+#
 
 # Step 2: Set the working directory inside the container
 WORKDIR /app
